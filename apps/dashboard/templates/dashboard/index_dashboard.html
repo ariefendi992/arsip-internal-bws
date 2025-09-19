@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css %}
+<!-- Table -->
+<link rel="stylesheet" href="{% static 'extensions/simple-datatables/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/table-datatable.css' %}">
+<!-- Edn Table -->
+<link rel="stylesheet" href="{% static 'css/iconly.css' %}">
+{% endblock css %}
+{% block content %}
+<section class="row">
+    <div class="col-12 col-lg-12">
+        <div class="row">
+            <div class="col-6 col-lg-3 col-md-6">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-8 col-lg-8 ">
+                                <h5>{{ totalDokumen }}</h5>
+                                <h6 class="mb-0">Total Dokumen</h6>
+                            </div>
+                            <div class="col-md-4 col-lg-4  d-flex justify-content-end">
+                                <div class="stats-icon red mb-2">
+                                    <i class="iconly-boldDocument"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-md-12 col-lg-12">
+                                <p><i class="bi bi-calendar-fill"></i> <span>Pada {{ today|date:"j F Y" }}</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3 col-md-6">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-8 col-lg-8 ">
+                                <h5>{{ totalSize }}</h5>
+                                <h6 class="mb-0">Total Size</h6>
+                            </div>
+                            <div class="col-md-4 col-lg-4  d-flex justify-content-end">
+                                <div class="stats-icon green mb-2">
+                                    <i class="iconly-boldFolder"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-md-12 col-lg-12">
+                                <p><i class="bi bi-info-circle-fill"></i> <span>File size dokumen</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3 col-md-6">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-8 col-lg-8 ">
+                                <h5>{{ totalKategori }}</h5>
+                                <h6 class="mb-0">Total Kategori</h6>
+                            </div>
+                            <div class="col-md-4 col-lg-4  d-flex justify-content-end">
+                                <div class="stats-icon purple mb-2">
+                                    <i class="iconly-boldFolder"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-md-12 col-lg-12">
+                                <p><i class="bi bi-info-circle-fill"></i> <span>Kategori digunakan</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3 col-md-6">
+                <a href="">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-8 col-lg-8 ">
+                                    <h5>Tambah Arsip</h5>
+                                    <hr>
+                                    <p>Tambahkan arsip dokumen digital</p>
+                                </div>
+                                <div class="col-md-4 col-lg-4  d-flex justify-content-end">
+                                    <div class="stats-icon blue mb-2">
+                                        <i class="iconly-boldDocument"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="row">
+    <div class="col-12 col-md-8 col-lg-8">
+        <div class="card">
+            <div class="card-header pb-0">
+                <h5 class="mb-0">Dokumen</h5>
+            </div>
+            <div class="card-body">
+                <fieldset class="form-group col-md-3 mt-2">
+                    {{ formKategori.kategori }}
+                </fieldset>
+
+                <div class="table-responsive">
+                    <table class="table table-sm" id="table2">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Judul</th>
+                                <th>Deskripsi</th>
+                                <th>Kategori</th>
+                                <th>Tgl Upload</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbl_body"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-md-4 col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-2">Kategori</h5c>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-sm" id="table1">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Kode</th>
+                                <th>Nama Kategori</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="row">
+    <div class="col-12 col-md-12 col-xl-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Quick Menu</h5>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
+
+{% block js %}
+<!-- table -->
+<script src="{% static 'extensions/simple-datatables/umd/simple-datatables.js' %}"></script>
+<script src="{% static 'js/simple-datatables.js' %}"></script>
+<!-- end table -->
+
+
+<script>
+    
+
+{% endblock js %}
